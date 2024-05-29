@@ -5,16 +5,17 @@ class JuegoBarcos:
     Tamaño_Barco = 0
     turnos = 0
 
-    def __init__(self, NumeroDeTamaño, NumeroDeTurno):
-        self.Set_Tamaño_Barco(NumeroDeTamaño)
+    def __init__(self, TamañoDeTablero, NumeroDeTurno, NombreDeUsuario):
+        self.Set_Tamaño_Tablero(TamañoDeTablero)
         self.Set_Turnos(NumeroDeTurno)
+        self.Setusuario(NombreDeUsuario)
         self.tablero = []
         for x in range(self.Tamaño_Barco):
             self.tablero.append(["·"] * self.Tamaño_Barco)
         self.filaBarco = self.filaAleatoria()
         self.columnaBarco = self.columnaAleatoria()
 
-    def Set_Tamaño_Barco(self, Numero_tamaño):
+    def Set_Tamaño_Tablero(self, Numero_tamaño):
         if not isinstance(Numero_tamaño, int):
             raise Exception("El tamaño del tablero debe de ser un número entero")
         if Numero_tamaño < 3:
@@ -28,7 +29,7 @@ class JuegoBarcos:
 
     def Set_Turnos(self, NumeroDeTurnos):
         if not isinstance(NumeroDeTurnos, int):
-            raise Exception("El tamaño del tablero debe de ser un número entero")
+            raise Exception("El Numero de turno debe de ser un número entero")
         if NumeroDeTurnos < 5:
             raise Exception("Al menos deben de haber 5 turnos")
         if NumeroDeTurnos > self.Tamaño_Barco * self.Tamaño_Barco:
@@ -37,6 +38,12 @@ class JuegoBarcos:
 
     def GetTurno(self):
         return self.turnos
+
+    def Setusuario(self, NombreDeUsuario):
+        self.NombreDeusuario = NombreDeUsuario
+
+    def Getusuario(self):
+        return self.NombreDeusuario
 
     def Mi_Tablero(self):
 
@@ -101,7 +108,10 @@ class JuegoBarcos:
 
 
 try:
-    juego = JuegoBarcos(8, 10)
+    TamañoDeTablero = int(input("Introduce el tamaño del tablero"))
+    NumeroDeTurno = int(input("Introduce el cantidad de turno"))
+    NombreDeUsuario = input("Introduce tu nombre")
+    juego = JuegoBarcos(TamañoDeTablero, NumeroDeTurno, NombreDeUsuario)
     juego.Juego()
 except Exception as e:
     print(f"Algo no ha ido bien: {e}")
