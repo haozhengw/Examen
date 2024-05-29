@@ -2,106 +2,106 @@ from random import randint
 
 
 class JuegoBarcos:
-    __tamanyo = 0
-    __turnos = 0
+    Tamaño_Barco = 0
+    turnos = 0
 
-    def __init__(self, ntamanyo, nturnos):
-        self.setTa(ntamanyo)
-        self.setTu(nturnos)
+    def __init__(self, NumeroDeTamaño, NumeroDeTurno):
+        self.Set_Tamaño_Barco(NumeroDeTamaño)
+        self.Set_Turnos(NumeroDeTurno)
         self.tablero = []
-        for x in range(self.__tamanyo):
-            self.tablero.append(["·"] * self.__tamanyo)
+        for x in range(self.Tamaño_Barco):
+            self.tablero.append(["·"] * self.Tamaño_Barco)
         self.filaBarco = self.filaAleatoria()
         self.columnaBarco = self.columnaAleatoria()
 
-    def setTa(self, ntamanyo):
-        if not isinstance(ntamanyo, int):
+    def Set_Tamaño_Barco(self, Numero_tamaño):
+        if not isinstance(Numero_tamaño, int):
             raise Exception("El tamaño del tablero debe de ser un número entero")
-        if ntamanyo < 3:
+        if Numero_tamaño < 3:
             raise Exception("El mínimo tamaño del tablero es 3")
-        if ntamanyo > 9:
+        if Numero_tamaño > 9:
             raise Exception("El máximo tamaño del tablero es 9")
-        self.__tamanyo = ntamanyo
+        self.Tamaño_Barco = Numero_tamaño
 
-    def getTa(self):
-        return self.__tamanyo
+    def GetTamañoBarco(self):
+        return self.Tamaño_Barco
 
-    def setTu(self, nturnos):
-        if not isinstance(nturnos, int):
+    def Set_Turnos(self, NumeroDeTurnos):
+        if not isinstance(NumeroDeTurnos, int):
             raise Exception("El tamaño del tablero debe de ser un número entero")
-        if nturnos < 5:
+        if NumeroDeTurnos < 5:
             raise Exception("Al menos deben de haber 5 turnos")
-        if nturnos > self.__tamanyo * self.__tamanyo:
+        if NumeroDeTurnos > self.Tamaño_Barco * self.Tamaño_Barco:
             raise Exception("Demasiados turnos para el tamaño del tablero")
-        self.__turnos = nturnos
+        self.turnos = NumeroDeTurnos
 
-    def getTu(self):
-        return self.__turnos
+    def GetTurno(self):
+        return self.turnos
 
-    def mT(self):
+    def Mi_Tablero(self):
 
-        li1 = "  | "
-        for i in range(self.__tamanyo):
-            li1 += str(i) + " "
-        print(li1)
+        Lista_Orizontal = "  | "
+        for NumeroDeFila in range(self.Tamaño_Barco):
+            Lista_Orizontal += str(NumeroDeFila) + " "
+        print(Lista_Orizontal)
 
-        li2 = "--+-"
-        for i in range(self.__tamanyo):
-            li2 += "--"
-        print(li2)
+        lista_vertical = "--+-"
+        for NumeroDeFila in range(self.Tamaño_Barco):
+            lista_vertical += "--"
+        print(lista_vertical)
 
-        i = 0
-        for f in self.tablero:
-            print(str(i) + " | " + " ".join(f))
-            i += 1
+        NumeroDeFila = 0
+        for Fila in self.tablero:
+            print(str(NumeroDeFila) + " | " + " ".join(Fila))
+            NumeroDeFila += 1
 
     def filaAleatoria(self):
-        return randint(0, self.__tamanyo - 1)
+        return randint(0, self.Tamaño_Barco - 1)
 
     def columnaAleatoria(self):
-        return randint(0, self.__tamanyo - 1)
+        return randint(0, self.Tamaño_Barco - 1)
 
-    def j(self):
+    def Juego(self):
         print("¡Juguemos a la guerra de barcos!")
-        self.mT()
-        for t in range(self.getTu()):
-            print(f"Te quedan {self.getTu() - t} turnos")
+        self.Mi_Tablero()
+        for Turno in range(self.GetTurno()):
+            print(f"Te quedan {self.GetTurno() - Turno} turnos")
             print("")
             print("Indica la posición que quieres bombardear:")
-            f = int(input("Fila: "))
-            c = int(input("Columna: "))
+            Fila = int(input("Fila: "))
+            Columna = int(input("Columna: "))
 
-            if f == self.filaBarco and c == self.columnaBarco:
+            if Fila == self.filaBarco and Columna == self.columnaBarco:
                 print("¡Enhorabuena! Hundiste mi barco.")
-                self.tablero[f][c] = "B"
-                self.mT()
+                self.tablero[Fila][Columna] = "B"
+                self.Mi_Tablero()
                 break
-                if self.tablero[f][c] == "B":
+                if self.tablero[Fila][Columna] == "B":
                     print("¡Bomb!")
             else:
-                if (f < 0 or f >= self.getTa()) or (
-                        c < 0 or c >= self.getTa()):
+                if (Fila < 0 or Fila >= self.GetTamañoBarco()) or (
+                        Columna < 0 or Columna >= self.GetTamañoBarco()):
                     print("Has indicado una posición fuera del tablero.")
-                elif self.tablero[f][c] == "X":
+                elif self.tablero[Fila][Columna] == "X":
                     print("Esa posición ya la habías adivinado.")
                 else:
                     print("¡Fallaste!")
-                    self.tablero[f][c] = "X"
+                    self.tablero[Fila][Columna] = "X"
 
-                self.mT()
-                if t + 1 == self.getTu():
+                self.Mi_Tablero()
+                if Turno + 1 == self.GetTurno():
                     print(" GAME OVER ")
-                    self.tablero[f][c] = "B"
-                    self.mT()
+                    self.tablero[Fila][Columna] = "B"
+                    self.Mi_Tablero()
 
-                if self.getTu() == self.getTu() - 2:
+                if self.GetTurno() == self.GetTurno() - 2:
                     print(" Queda poco para terminar ")
-                    self.tablero[f][c] = "?"
-                    self.mT()
+                    self.tablero[Fila][Columna] = "?"
+                    self.Mi_Tablero()
 
 
 try:
     juego = JuegoBarcos(8, 10)
-    juego.j()
+    juego.Juego()
 except Exception as e:
     print(f"Algo no ha ido bien: {e}")
