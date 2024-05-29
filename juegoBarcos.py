@@ -85,10 +85,6 @@ class JuegoBarcos:
             Fila = int(input("Fila: "))
             Columna = int(input("Columna: "))
 
-            print(f"{self.filaBarco} + {self.columnaBarco}")
-            print(f"{self.filaBarco2} + {self.columnaBarco2}")
-            print(f"{self.filaBarco3} + {self.columnaBarco3}")
-            print(NumeroBarcoUndidio)
 
 
 
@@ -142,13 +138,13 @@ class JuegoBarcos:
                     self.Mi_Tablero()
 
                 if self.GetTurno() == self.GetTurno() - 2:
-                    print(" Queda poco para terminar ")
+                    print(" Queda poc per a acabar ")
                     self.tablero[Fila][Columna] = "?"
                     self.Mi_Tablero()
 
 
 try:
-    TamañoDeTablero = int(input("Queda poc per a acabar"))
+    TamañoDeTablero = int(input("Introduïx la grandària del tauler"))
     NumeroDeTurno = int(input("Introduïx el quantitat de torn"))
     NombreDeUsuario = input("Introduïx el teu nom")
     juego = JuegoBarcos(TamañoDeTablero, NumeroDeTurno, NombreDeUsuario)
