@@ -15,10 +15,18 @@ class JuegoBarcos:
             self.tablero.append(["·"] * self.Tamaño_Tablero)
         self.filaBarco = self.filaAleatoria()
         self.columnaBarco = self.columnaAleatoria()
+        Barco1 = f"{self.filaBarco}+{self.columnaBarco}"
         self.filaBarco2 = self.filaAleatoria()
         self.columnaBarco2 = self.columnaAleatoria()
+        while f"{self.filaBarco2}"+f"{self.columnaBarco2}" == Barco1:
+            self.filaBarco2 = self.filaAleatoria()
+            self.columnaBarco2 = self.columnaAleatoria()
+        Barco2 = f"{self.filaBarco2}+{self.columnaBarco2}"
         self.filaBarco3 = self.filaAleatoria()
         self.columnaBarco3 = self.columnaAleatoria()
+        while f"{self.filaBarco3}" + f"{self.columnaBarco3}" == Barco2:
+            self.filaBarco3 = self.filaAleatoria()
+            self.columnaBarco3 = self.columnaAleatoria()
 
     def Set_Tamaño_Tablero(self, Numero_tamaño):
         if not isinstance(Numero_tamaño, int):
